@@ -1,0 +1,46 @@
+.wrapper {    
+	margin-top: 80px;
+	margin-bottom: 20px;
+}
+
+.form-signin {
+  max-width: 420px;
+  padding: 30px 38px 30px;
+  margin: 0 auto;
+  background-color: #32bebe;   
+  }
+  .cabecera {
+  margin-bottom: 100px;
+  background-color: #32bebe;   
+  }
+
+.form-signin-heading {
+  text-align:center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: white;
+  font-size: 40px;
+}
+
+.form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+}
+.btn btn-lg btn-primary btn-block{
+	background-color: gray;
+}
+
+input[type="text"] {
+  margin-bottom: 0px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+input[type="password"] {
+  margin-bottom: 20px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
