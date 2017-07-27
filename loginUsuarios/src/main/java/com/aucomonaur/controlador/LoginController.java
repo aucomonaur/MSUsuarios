@@ -80,7 +80,7 @@ public class LoginController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="/admin/home", method = RequestMethod.GET)
+	@RequestMapping(value="/usuario/home", method = RequestMethod.GET)
 	public ModelAndView home(){
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -102,7 +102,7 @@ public class LoginController {
         modelAndView.addObject("hayDatosGrupos", hayDatos);
 		modelAndView.addObject("userName", "Usuario: " + usuario.getName() + " " + usuario.getAlias() + " (" + usuario.getEmail() + ")");
 		modelAndView.addObject("adminMessage","Bienvenido");
-		modelAndView.setViewName("admin/home");
+		modelAndView.setViewName("usuario/home");
 		return modelAndView;
 	}
 	@GetMapping(value="/get_usuario")
