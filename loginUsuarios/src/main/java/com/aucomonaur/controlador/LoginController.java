@@ -1,5 +1,8 @@
 package com.aucomonaur.controlador;
 
+import java.io.IOException;
+import java.net.ConnectException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +11,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,12 +20,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aucomonaur.modelo.Grupo;
+import com.aucomonaur.modelo.Post;
 import com.aucomonaur.modelo.Usuario;
 import com.aucomonaur.modelo.Json.UsuarioJson;
 import com.aucomonaur.repositorio.RepositorioUsuarios;
 import com.aucomonaur.servicios.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import aj.org.objectweb.asm.TypeReference;
 
 
 @RestController
@@ -75,6 +85,21 @@ public class LoginController {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Usuario usuario = userService.findUserByEmail(auth.getName());
+		ObjectMapper mapper = new ObjectMapper();
+		boolean hayDatos = false;
+        try {
+//        	d='[{"id_grupo":1,"nombre":"Grupo1","materia":"Tecnologias Web","carrera":"Sistemas","facultad":"Ingenieria","periodo_academico":"26 Jul 2017 05:00:00 GMT"}]'; 
+        	Grupo[] usrPost = mapper.readValue(new URL("file:///C:/ex.json"), Grupo[].class);
+//        	Grupo[] usrPost = mapper.readValue(new URL("http://172.16.147.43:9092/get_grupos_usuario?id_usuario="+usuario.getId()), Grupo[].class);
+//            List<Grupo> usrPost = mapper.readValues(new URL("localhost:9092/get_grupos_usuario?id_usuario="+usuario.getId()), new TypeReference(){});
+            modelAndView.addObject("grupos",usrPost);
+        	System.out.println("asdf"+usrPost);
+            hayDatos = true;
+        } catch (IOException ex) {
+        	System.out.println("No se ha encontrado datos de grupos");
+            ex.printStackTrace();
+        }
+        modelAndView.addObject("hayDatosGrupos", hayDatos);
 		modelAndView.addObject("userName", "Usuario: " + usuario.getName() + " " + usuario.getAlias() + " (" + usuario.getEmail() + ")");
 		modelAndView.addObject("adminMessage","Bienvenido");
 		modelAndView.setViewName("admin/home");

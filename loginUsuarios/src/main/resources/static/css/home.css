@@ -3,3 +3,20 @@
 	font-size: 22px;
 	color: #32bebe;
 }
+
+.data-control {
+	position: relative;
+	color: black; font-size : 16px;
+	height: auto;
+	padding: 10px;
+	font-size: 16px;
+}
+
+.cabecera {
+	margin-bottom: 15px;
+	background-color: #32bebe;
+}
+
+tr {
+	padding: 10px;
+}
