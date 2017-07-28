@@ -62,7 +62,7 @@ public class LoginController {
 		Facultad[] facultades;
 		ArrayList<LfacultadCarrera> lfc = new ArrayList<>();
 		try {
-			facultades = mapper.readValue(new URL("file:///C:/facultades.json"), Facultad[].class);
+			facultades = mapper.readValue(new URL("file:///C:/Users/visita/Documents/Universidad/10mo/Tecnolog%C3%ADas%20Web%20Avanzadas/facultades"), Facultad[].class);
 			modelAndView.addObject("facultades", facultades);
 			for (Facultad f : facultades) {
 				for (Carrera c : f.getCarreras()) {

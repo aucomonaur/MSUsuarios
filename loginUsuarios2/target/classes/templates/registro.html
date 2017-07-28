@@ -52,9 +52,12 @@
 
 					<div class="form-group">
 						<label th:if="${#fields.hasErrors('genero')}"
-							th:errors="*{genero}" class="validation-message"></label> <input
-							type="text" th:field="*{genero}" placeholder="Genero"
-							class="form-control" />
+							th:errors="*{genero}" class="validation-message"></label> 
+							 <select th:field="*{genero}" class="form-control">
+        							<option value="0">Seleccione su genero</option>
+        							<option value="1">Femenino</option>
+        							<option value="2">Masculino</option>
+        				      </select>											
 					</div>
 					<div class="form-group">
 						<input type="text" th:field="*{email}" placeholder="Correo"
