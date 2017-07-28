@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.net.ConnectException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,13 +21,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aucomonaur.modelo.Carrera;
 import com.aucomonaur.modelo.Facultad;
 import com.aucomonaur.modelo.Grupo;
+import com.aucomonaur.modelo.LfacultadCarrera;
 import com.aucomonaur.modelo.Post;
 import com.aucomonaur.modelo.Usuario;
 import com.aucomonaur.modelo.Json.UsuarioJson;
 import com.aucomonaur.repositorio.RepositorioUsuarios;
 import com.aucomonaur.servicios.UserService;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import aj.org.objectweb.asm.TypeReference;
@@ -42,14 +47,7 @@ public class LoginController {
 	@RequestMapping(value = { "/", "/login" }, method = RequestMethod.GET)
 	public ModelAndView login() {
 		ModelAndView modelAndView = new ModelAndView();
-		ObjectMapper mapper = new ObjectMapper();
-		try {
-			Facultad[] usrPost = mapper.readValue(new URL("file:///C:/Users/visita/Downloads/facultades.json"),
-					Facultad[].class);
-		} catch (IOException ex) {
-			System.out.println("No se han encontrado datos de facultades");
-			ex.printStackTrace();
-		}
+
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
@@ -58,6 +56,35 @@ public class LoginController {
 	public ModelAndView registro() {
 		ModelAndView modelAndView = new ModelAndView();
 		Usuario usuario = new Usuario();
+		ObjectMapper mapper = new ObjectMapper();
+		boolean isFacultades = false;
+		// try {
+		Facultad[] facultades;
+		ArrayList<LfacultadCarrera> lfc = new ArrayList<>();
+		try {
+			facultades = mapper.readValue(new URL("file:///C:/facultades.json"), Facultad[].class);
+			modelAndView.addObject("facultades", facultades);
+			for (Facultad f : facultades) {
+				for (Carrera c : f.getCarreras()) {
+					lfc.add(new LfacultadCarrera(f.getNombre() + " - " + c.getNombre(), c.getId_carrera()));
+				}
+			}
+			modelAndView.addObject("lfacultadCarrera", lfc);
+			isFacultades = true;
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		modelAndView.addObject("isFacultades", isFacultades);
 		modelAndView.addObject("user", usuario);
 		modelAndView.setViewName("registro");
 		return modelAndView;

@@ -1,9 +1,11 @@
 package com.aucomonaur.modelo;
 
+import java.util.List;
+
 public class Facultad {
 	private long id_facultad;
 	private String nombre;
-	private Carrera[] carreras;
+	private List<Carrera> carreras;
 
 	public long getId_facultad() {
 		return id_facultad;
@@ -21,11 +23,11 @@ public class Facultad {
 		this.nombre = nombre;
 	}
 
-	public Carrera[] getCarreras() {
+	public List<Carrera> getCarreras() {
 		return carreras;
 	}
 
-	public void setCarreras(Carrera[] carreras) {
+	public void setCarreras(List<Carrera> carreras) {
 		this.carreras = carreras;
 	}
 
