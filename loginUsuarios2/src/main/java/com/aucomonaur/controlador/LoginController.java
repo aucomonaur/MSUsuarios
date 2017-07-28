@@ -149,7 +149,7 @@ public class LoginController {
 		return modelAndView;
 	}
 
-	@GetMapping(value = "/get_usuario")
+	/*@GetMapping(value = "/get_usuario")
 	public ResponseEntity<List<Usuario>> getUsuario(String id_usuario) {
 		List<Usuario> resultado = new ArrayList<>();
 
@@ -173,6 +173,6 @@ public class LoginController {
 		usuario = userService.findUserByEmail(correo);
 
 		return new ResponseEntity<UsuarioJson>(new UsuarioJson(usuario), HttpStatus.OK);
-	}
+	}*/
 
 }

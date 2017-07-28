@@ -50,6 +50,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/registro").permitAll()
 				.antMatchers("/search_correo").permitAll()
 				.antMatchers("/get_usuario").permitAll()
+				.antMatchers("http://localhost:9081/eureka").permitAll()
+				.antMatchers("http://localhost:9081").permitAll()
 				.antMatchers("/usuario/**").hasAuthority("usuario").anyRequest()
 				.authenticated().and().csrf().disable().formLogin()
 				.loginPage("/login").failureUrl("/login?error=true")
