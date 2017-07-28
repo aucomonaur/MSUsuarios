@@ -36,11 +36,13 @@
 				<div class="panel-body"></div>
 				<p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
 			</div>
+			<span th:utext="${crearGrupo}"></span>
 			<div th:switch="${hayDatosGrupos}">
 				<div th:case="true">
 					<h3 class="text-center">Grupos a los que perteneces</h3>
 					<div th:each="grupoItem : ${grupos}">
 						<h3 class="text-center" th:text="${grupoItem.nombre}"></h3>
+						<a th:href="${grupoItem.idUsuario}"><button>Ir al Chat</button></a> 
 						<table  align="center" style="width: 50%">
 							<tr>
 								<th width="50%" bgcolor="#32bebe">Materia</th>

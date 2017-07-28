@@ -5,30 +5,69 @@
 <head>
 <title>Pagina Usuario</title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
+	<div class="cabecera">
+		<img alt="Logo" src="/images/logo_icono.png" style="height: 60px;">
+		<img alt="Logo" src="/images/logo_nombre.png" style="height: 50px;">
+		<div
+			style="float: right; padding-top: 10px; padding-right: 30px; padding-bottom: 20px;">
+			<form th:action="@{/logout}" method="get">
+				<button class="btn btn-md btn-danger" name="registration"
+					type="Submit">Salir</button>
+			</form>
+		</div>
+		<div class="panel-heading"
+			style="float: right; padding-top: 20px; padding-right: 10px; padding-bottom: 20px;">
+			<span th:utext="${userName}"></span>
+		</div>
+	</div>
+
 	<div class="container">
-	
-		<form th:action="@{/logout}" method="get">
-			<button class="btn btn-md btn-danger btn-block" name="registration"
-				type="Submit">Salir</button>
-		</form>    
-		
-		<div class="panel-group" style="margin-top:40px">
+		<div class="panel-group" style="margin-top: 40px">
 			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<span th:utext="${userName}"></span>
-				</div>
-				<div class="panel-body">					 
-				</div>
+				<div class="panel-body"></div>
 				<p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
 			</div>
+			<div th:switch="${hayDatosGrupos}">
+				<div th:case="true">
+					<h3 class="text-center">Grupos a los que perteneces</h3>
+					<div th:each="grupoItem : ${grupos}">
+						<h3 class="text-center" th:text="${grupoItem.nombre}"></h3>
+						<table  align="center" style="width: 50%">
+							<tr>
+								<th width="50%" bgcolor="#32bebe">Materia</th>
+								<th width="50%" bgcolor="#32bebe">Carrera</th>
+							</tr>
+							<tr>
+								<td width="50%" th:text="${grupoItem.materia}"></td>
+								<td width="50%" th:text="${grupoItem.carrera}"></td>
+							</tr>
+							<tr>
+								<th width="50%" bgcolor="#32bebe">Facultad</th>
+								<th width="50%" bgcolor="#32bebe">Periodo Académico</th>
+							</tr>
+							<tr>
+								<td width="50%" th:text="${grupoItem.facultad}"></td>
+								<td width="50%" th:text="${grupoItem.periodo_academico}"></td>
+							</tr>
+
+						</table>
+					</div>
+				</div>
+				<!--En caso de que no se encuentren grupos -->
+				<div th:case="false">
+					<h3 class="text-center">No se han encontrado grupos</h3>
+				</div>
+			</div>
 		</div>
-		
 	</div>
 </body>
 </html>
