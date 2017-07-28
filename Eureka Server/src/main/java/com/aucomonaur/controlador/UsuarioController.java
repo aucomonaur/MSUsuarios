@@ -32,7 +32,6 @@ public class UsuarioController {
 			return new ResponseEntity<List<Usuario>>(HttpStatus.BAD_REQUEST);
 		
 		String [] ids_usuarios = id_usuario.split(",");
-		System.out.println("asd");
 		
 		for (int i = 0; i < ids_usuarios.length; i++) {
 			resultado.add(repositorioUsuarios.findOne(Long.valueOf(ids_usuarios[i])));
