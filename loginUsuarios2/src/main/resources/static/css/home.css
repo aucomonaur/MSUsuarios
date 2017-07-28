@@ -1,3 +1,19 @@
+.mbtn {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+  text-align: center;
+background-color:#fff;
+color: #fff
+}
+a{
+	text-align: center;
+	font-size: 22px;
+	background-color: #286090;
+	color: #fff
+}
+
 .admin-message-text {
 	font-style: normal;
 	font-size: 22px;
