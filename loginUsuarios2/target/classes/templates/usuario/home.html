@@ -5,6 +5,7 @@
 <head>
 <title>Pagina Usuario</title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -36,14 +37,21 @@
 				<div class="panel-body"></div>
 				<p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
 			</div>
-			<span th:utext="${crearGrupo}"></span>
+			<div class="mbtn">
+				<span th:utext="${crearGrupo}"></span><img text-align="right"  alt="Logo" src="/images/grupo.png" style="height: 40px;">
+			</div>
 			<div th:switch="${hayDatosGrupos}">
 				<div th:case="true">
 					<h3 class="text-center">Grupos a los que perteneces</h3>
 					<div th:each="grupoItem : ${grupos}">
 						<h3 class="text-center" th:text="${grupoItem.nombre}"></h3>
-						<a th:href="${grupoItem.idUsuario}"><button>Ir al Chat</button></a> 
+						 
 						<table  align="center" style="width: 50%">
+							<tr width="50%">
+								<td colspan="2">
+									<a th:href="${grupoItem.idUsuario}" ><button class="btn btn-lg btn-primary btn-block">Ir al Chat  <img text-align="right"  alt="Logo" src="/images/mensaje.png" style="height: 30px;"></button></a>
+								</td>
+							</tr>
 							<tr>
 								<th width="50%" bgcolor="#32bebe">Materia</th>
 								<th width="50%" bgcolor="#32bebe">Carrera</th>
